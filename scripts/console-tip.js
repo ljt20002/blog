@@ -42,6 +42,7 @@ async function main() {
     const commitCommand = `git commit -m "${type}: ${message}"`;
     execSync(commitCommand, { stdio: 'inherit' });
     console.log('\n提交成功！');
+    execSync('npm run release', { stdio: 'inherit' });
   } catch (error) {
     console.error(error.message);
     process.exit(1);
