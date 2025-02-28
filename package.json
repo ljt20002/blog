@@ -1,0 +1,56 @@
+{
+  "name": "blog",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "prepare": "husky install",
+    "dev": "rsbuild dev --open",
+    "build": "rsbuild build",
+    "preview": "rsbuild preview",
+    "release": "standard-version",
+    "generate": "node ./scripts/generate-blog-files.js && node ./scripts/md-to-html.js"
+  },
+  "dependencies": {
+    "@arco-design/web-react": "^2.65.0",
+    "highlight.js": "^11.11.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.3",
+    "standard-version": "^9.5.0"
+  },
+  "devDependencies": {
+    "@arco-plugins/unplugin-react": "^1.0.2",
+    "@byted/eslint-config-standard": "^3.2.2",
+    "@byted/eslint-config-standard-react": "^2.4.0",
+    "@byted/eslint-config-standard-ts": "^3.2.2",
+    "@byted/prettier-config-standard": "^1.0.0",
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@rsbuild/core": "^1.1.8",
+    "@rsbuild/plugin-less": "^1.1.0",
+    "@rsbuild/plugin-react": "^1.0.7",
+    "@types/node": "^22.10.8",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "gray-matter": "^4.0.3",
+    "husky": "7.0.1",
+    "lint-staged": "^15.4.1",
+    "marked": "^12.0.0",
+    "mkdirp": "^3.0.1",
+    "prettier": "^3.3.3",
+    "typescript": "5.7.3"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,mjs,mjsx,cjs,cjsx}": [
+      "node --max_old_space_size=8192 ./node_modules/eslint/bin/eslint.js -c .eslintrc.js --fix --cache --quiet"
+    ]
+  }
+}

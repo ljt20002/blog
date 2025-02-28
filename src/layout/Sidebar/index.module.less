@@ -1,0 +1,147 @@
+.sidebar {
+  width: 300px;
+  padding: 20px;
+  background-color: #fff;
+
+  :global(.arco-calendar-cell) {
+    cursor: pointer;
+  }
+
+  .searchBox {
+    margin-bottom: 20px;
+    :global(.arco-input-search) {
+      width: 100%;
+    }
+  }
+
+  .calendarBox {
+    margin-bottom: 20px;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
+    padding: 12px;
+    :global(.arco-calendar) {
+      width: 100% !important;
+    }
+  }
+
+  .recentPosts {
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #1d2129;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        margin-bottom: 15px;
+
+        a {
+          display: block;
+          color: #333;
+          text-decoration: none;
+          font-size: 14px;
+          margin-bottom: 5px;
+
+          &:hover {
+            color: #1890ff;
+          }
+        }
+
+        .date {
+          display: block;
+          font-size: 12px;
+          color: #999;
+        }
+      }
+    }
+  }
+}
+// 在现有样式的基础上添加
+// 日期单元格基础样式
+.dateNumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  transition: all 0.2s;
+  margin: 0 auto;
+}
+
+// 有文章的日期样式
+.dateWithPosts {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 12px; // 增加底部内边距，为文章数量标记留出更多空间
+
+  .dateNumber {
+    color: #1890ff;
+    font-weight: 500;
+  }
+
+  .postCount {
+    position: absolute;
+    bottom: 0; // 调整位置，确保不会被截断
+    font-size: 10px;
+    background-color: #1890ff;
+    color: white;
+    border-radius: 50%;
+    min-width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2px;
+    box-sizing: border-box;
+  }
+}
+
+// 选中日期的样式
+.selectedDate {
+  .dateNumber {
+    background-color: #1890ff;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  // 选中且有文章的日期样式
+  &.dateWithPosts {
+    .postCount {
+      background-color: #fff;
+      color: #1890ff;
+      border: 1px solid #1890ff;
+      bottom: 0; // 与上面保持一致
+    }
+  }
+}
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+
+  span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1d2129;
+  }
+
+  .clearDateBtn {
+    color: #86909c;
+
+    &:hover {
+      color: #1890ff;
+    }
+  }
+}

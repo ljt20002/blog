@@ -1,0 +1,32 @@
+.tagCloud {
+  padding: 10px;
+  border: 1px solid #f0f0f0;
+  margin-top: 20px;
+
+  .tagTitle {
+    font-size: 16px; // 减小标题字体大小
+    font-weight: 600;
+    margin-bottom: 12px; // 减小底部间距
+    color: #1d2129;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .tag {
+    cursor: pointer;
+    color: #333;
+    transition: all 0.2s;
+    padding: 3px 6px; // 减小内边距
+    border-radius: 4px;
+    background-color: #f5f7fa;
+    display: inline-block;
+    margin-left: 5px;
+    margin-bottom: 6px; // 减小底部间距
+    font-size: 12px; // 设置基础字体大小更小
+
+    &:hover {
+      color: #fff;
+      background-color: #1890ff;
+    }
+  }
+}
