@@ -22,8 +22,8 @@ marked.setOptions({
 });
 
 // 源目录和目标目录
-const postsDir = path.join(__dirname, '../public/posts');
-const outputDir = path.join(__dirname, '../public/md');
+const postsDir = path.join(__dirname, '../posts');
+const outputDir = path.join(__dirname, '../public/md'); // HTML 输出到 public/md
 
 // 确保输出目录存在
 mkdirp.sync(outputDir);

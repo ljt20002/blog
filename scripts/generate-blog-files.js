@@ -40,7 +40,7 @@ function parseFrontMatter(content) {
 
 // 生成博客文件和元数据
 function generateBlogFiles() {
-  const postsDir = path.join(__dirname, '../public/posts');
+  const postsDir = path.join(__dirname, '../posts');
   const outputPath = path.join(__dirname, '../src/mdFiles.ts');
 
   try {
