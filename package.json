@@ -8,7 +8,7 @@
     "build": "rsbuild build",
     "preview": "rsbuild preview",
     "release": "standard-version",
-    "generate": "node ./scripts/generate-blog-files.js && node ./scripts/md-to-html.js"
+    "generate": "node ./scripts/generate-blog-files.js && node ./scripts/md-to-html.js && node ./scripts/console-tip.js"
   },
   "dependencies": {
     "@arco-design/web-react": "^2.65.0",

@@ -7,7 +7,6 @@ if (rootEl) {
   root.render(
     <React.StrictMode>
       <App />
-      <div>131</div>
     </React.StrictMode>,
   );
 }
