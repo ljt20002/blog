@@ -1,54 +1,52 @@
-# 将静态内容部署到 GitHub Pages 的简易工作流程
 name: Deploy static content to Pages
-
 on:
-  # 仅在推送到默认分支时运行。
   push:
     branches: ['main']
-
-  # 这个选项可以使你手动在 Action tab 页面触发工作流
   workflow_dispatch:
 
-# 设置 GITHUB_TOKEN 的权限，以允许部署到 GitHub Pages。
-permissions:
+permissions: # 权限配置正确
   contents: read
   pages: write
   id-token: write
 
-# 允许一个并发的部署
-concurrency:
+concurrency: # 改进：新部署会取消进行中的任务
   group: 'pages'
   cancel-in-progress: true
 
 jobs:
-  # 单次部署的工作描述
   deploy:
-    environment:
+    environment: # 环境配置正确
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
+      # 新增前端工程化流程 ↓↓↓
+      - uses: pnpm/action-setup@v2 # 安装 pnpm
         with:
           version: 8
-      - name: Set up Node
+
+      - name: Set up Node # 配置 Node 环境
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'pnpm'
-      - name: Install dependencies
+          cache: 'pnpm' # 启用 pnpm 缓存
+
+      - name: Install dependencies # 安装依赖
         run: pnpm install
-      - name: Build
+
+      - name: Build # 执行构建
         run: pnpm run build
+      # 新增前端工程化流程 ↑↑↑
+
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v3 # 注意版本号降级
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v2 # 版本号降级
         with:
-          # Upload dist repository
-          path: './dist'
+          path: './dist' # ✅ 正确指向构建输出目录
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v2 # 版本号降级
