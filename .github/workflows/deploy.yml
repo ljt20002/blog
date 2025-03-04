@@ -21,6 +21,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+    
       # 新增前端工程化流程 ↓↓↓
       - uses: pnpm/action-setup@v2 # 安装 pnpm
         with:
