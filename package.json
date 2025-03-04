@@ -21,10 +21,6 @@
   },
   "devDependencies": {
     "@arco-plugins/unplugin-react": "^1.0.2",
-    "@byted/eslint-config-standard": "^3.2.2",
-    "@byted/eslint-config-standard-react": "^2.4.0",
-    "@byted/eslint-config-standard-ts": "^3.2.2",
-    "@byted/prettier-config-standard": "^1.0.0",
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
     "@rsbuild/core": "^1.1.8",
