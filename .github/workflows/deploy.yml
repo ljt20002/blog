@@ -25,16 +25,15 @@ jobs:
       - uses: pnpm/action-setup@v2 # 安装 pnpm
         with:
           version: 8
+          
+      - name: Get Branch Name
+        shell: bash
+        run: ls
 
       - name: Set up Node # 配置 Node 环境
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'pnpm' # 启用 pnpm 缓存
-
-      - name: Get Branch Name
-        shell: bash
-        run: ls
 
       - name: Install dependencies # 安装依赖
         run: pnpm install
