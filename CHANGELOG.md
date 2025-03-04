@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](///compare/v1.3.0...v1.3.1) (2025-03-04)
+
+
+### 💄 样式
+
+* 调整移动端适配样式 66e1a1b
+
 ## [1.3.0](///compare/v1.2.2...v1.3.0) (2025-03-04)
 
 
