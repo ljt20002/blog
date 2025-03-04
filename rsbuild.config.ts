@@ -8,6 +8,10 @@ export default defineConfig({
       '@': join(__dirname, 'src'),
     },
   },
+  output:{
+    publicPath: './', // 新增这行配置
+    assetPrefix: './',
+  },
   source: {
     transformImport: [
       {
