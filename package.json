@@ -5,7 +5,7 @@
   "scripts": {
     "prepare": "husky install",
     "dev": "rsbuild dev --open",
-    "build": "npm run generate && rsbuild build",
+    "build": "rsbuild build",
     "preview": "rsbuild preview",
     "release": "standard-version",
     "generate": "node ./scripts/generate-blog-files.js && node ./scripts/md-to-html.js && node ./scripts/console-tip.js"
