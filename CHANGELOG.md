@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.2](https://github.com/ljt20002/blog/compare/v1.4.1...v1.4.2) (2025-03-04)
+
+
+### ✅ 测试
+
+* 测试自动化 ([e2b2223](https://github.com/ljt20002/blog/commit/e2b22231b91f3ac3b2248c6083157c491ce3e4ed))
+
 ### [1.4.1](https://github.com/ljt20002/blog/compare/v1.4.0...v1.4.1) (2025-03-04)
 
 
