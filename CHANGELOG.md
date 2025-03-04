@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/ljt20002/blog/compare/v1.3.1...v1.4.0) (2025-03-04)
+
+
+### ✨ 新功能
+
+* 添加自动化部署 ([294b484](https://github.com/ljt20002/blog/commit/294b484c7736cb8df2ceba057469754ab3c1ebf0))
+
 ### [1.3.1](///compare/v1.3.0...v1.3.1) (2025-03-04)
 
 
