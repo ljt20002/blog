@@ -40,13 +40,13 @@ jobs:
       # 新增前端工程化流程 ↑↑↑
 
       - name: Setup Pages
-        uses: actions/configure-pages@v3 # 注意版本号降级
+        uses: actions/configure-pages@v5 # 注意版本号降级
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2 # 版本号降级
+        uses: actions/upload-pages-artifact@v3 # 版本号降级
         with:
           path: './dist' # ✅ 正确指向构建输出目录
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2 # 版本号降级
+        uses: actions/deploy-pages@v4 # 版本号降级
