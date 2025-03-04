@@ -21,31 +21,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: blog # 显式指定检出目录名称
+
       # 新增前端工程化流程 ↓↓↓
-      - uses: pnpm/action-setup@v2 # 安装 pnpm
+      - uses: pnpm/action-setup@v2
         with:
           version: 8
 
-      - name: Set up Node # 配置 Node 环境
+      - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'pnpm' # 启用 pnpm 缓存
+          cache: 'pnpm'
+          cache-dependency-path: blog/pnpm-lock.yaml # 指定缓存路径
 
-      - name: Install dependencies # 安装依赖
-        run: pnpm install
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: ./blog # 关键修复点：指定子目录
 
-      - name: Build # 执行构建
+      - name: Build
         run: pnpm run build
+        working-directory: ./blog # 保持目录一致
       # 新增前端工程化流程 ↑↑↑
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5 # 注意版本号降级
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3 # 版本号降级
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # ✅ 正确指向构建输出目录
+          path: blog/dist # 添加子目录前缀
 
       - name: Deploy to GitHub Pages
         id: deployment
