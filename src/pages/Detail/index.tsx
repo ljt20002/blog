@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 const Detail = () => {
   const id = new URLSearchParams(window.location.search).get('id');
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const detailRef = useRef<HTMLIFrameElement>(null);
+  const detailRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleIframeLoad = () => {
@@ -31,7 +31,14 @@ const Detail = () => {
 
   return (
     <div className={styles.detail} ref={detailRef}>
-      <iframe ref={iframeRef} src={`/md/${id}.html`} />
+      <iframe
+        ref={iframeRef}
+        src={`/md/${id}.html`}
+        title="文章详情"
+        loading="lazy"
+        sandbox="allow-same-origin allow-scripts"
+        referrerPolicy="no-referrer"
+      />
     </div>
   );
 };

@@ -1,10 +1,13 @@
 import { Navigate } from 'react-router-dom';
 import MainLayout from '../layout/MainLayout';
-import NotFound from '../pages/NotFound';
 import { lazy } from 'react';
-import Detail from '@/pages/Detail';
-import AboutMe from '@/pages/AboutMe';
+import ErrorFallback from '@/pages/ErrorFallback';
+
 const Home = lazy(() => import('../pages/Home'));
+const AboutMe = lazy(() => import('@/pages/AboutMe'));
+const Detail = lazy(() => import('@/pages/Detail'));
+const Test = lazy(() => import('@/pages/Test'));
+const NotFound = lazy(() => import('../pages/NotFound'));
 
 export interface AppRouteObject {
   path?: string;
@@ -12,6 +15,7 @@ export interface AppRouteObject {
   children?: AppRouteObject[];
   title?: string;
   hideInMenu?: boolean;
+  errorElement?: React.ReactNode;
 }
 
 export const contentRoutes: AppRouteObject[] = [
@@ -26,9 +30,15 @@ export const contentRoutes: AppRouteObject[] = [
     title: '首页',
   },
   {
-    path: '/AboutMe',
+    path: '/about-me',
     element: <AboutMe />,
     title: '关于我',
+  },
+  // 兼容旧路径
+  {
+    path: '/AboutMe',
+    element: <Navigate to="/about-me" replace />,
+    hideInMenu: true,
   },
   {
     path: '/detail',
@@ -42,7 +52,13 @@ const routes: AppRouteObject[] = [
   {
     path: '/',
     element: <MainLayout />,
+    errorElement: <ErrorFallback />,
     children: contentRoutes,
+  },
+  {
+    path: '/test',
+    element: <Test />,
+    title: 'Test',
   },
   {
     path: '*',

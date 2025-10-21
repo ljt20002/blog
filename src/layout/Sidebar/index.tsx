@@ -62,7 +62,9 @@ const Sidebar = () => {
 
     return (
       <div className={classNames.join(' ')}>
-        <div className={styles.dateNumber}>{date.date()}</div>
+        <div className={styles.dateNumber} style={{
+          color: isSelected ? '#165DFF' : '#1D2129',
+        }}>{date.date()}</div>
         {count > 0 && <div className={styles.postCount}>{count}</div>}
       </div>
     );
