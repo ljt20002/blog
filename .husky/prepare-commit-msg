@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# 在提交前将本次提交内容写入 CHANGELOG 顶部并纳入暂存
+node scripts/append-changelog.js "$1"
