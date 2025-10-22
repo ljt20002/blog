@@ -23,5 +23,10 @@ export default defineConfig({
       },
     ],
   },
+  // 设置站点标题与 favicon
+  html: {
+    title: '嘉图的网络日志',
+    favicon: './public/favicon.svg',
+  },
   plugins: [pluginLess(), pluginReact()],
 });

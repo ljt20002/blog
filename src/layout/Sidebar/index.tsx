@@ -11,6 +11,12 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchValue, setSearchValue] = useState('');
+  // 追踪当前面板月份用于判定“非本月日期”
+  const [panelMonth, setPanelMonth] = useState<string>(() => {
+    const d = new Date();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    return `${d.getFullYear()}-${mm}`;
+  });
 
   // searchValue也要跟随search变化
   useEffect(() => {
@@ -46,26 +52,26 @@ const Sidebar = () => {
     navigate(`/home?${searchParams.toString()}`);
   };
 
+  // 面板月份变化时更新（点击左右箭头或选择头部下拉）
+  const handlePanelChange: CalendarProps['onPanelChange'] = (date) => {
+    setPanelMonth(date.format('YYYY-MM'));
+  };
+
   const dateRender: CalendarProps['dateRender'] = (date) => {
     const dateStr = date.format('YYYY-MM-DD');
-    const count = postCountByDate[dateStr];
+    const count = postCountByDate[dateStr] || 0;
     const isSelected = dateStr === currentSelectedDate;
+    const isInCurrentMonth = date.format('YYYY-MM') === panelMonth;
 
-    // 组合样式类名
-    const classNames = [];
-    if (isSelected) {
-      classNames.push(styles.selectedDate);
-    }
-    if (count) {
-      classNames.push(styles.dateWithPosts);
-    }
+    const classNames = [styles.dateCell];
+    if (isSelected) classNames.push(styles.selectedDate);
+    if (count > 0) classNames.push(styles.dateWithPosts);
+    if (!isInCurrentMonth) classNames.push(styles.notInMonth);
 
     return (
-      <div className={classNames.join(' ')}>
-        <div className={styles.dateNumber} style={{
-          color: isSelected ? '#165DFF' : '#1D2129',
-        }}>{date.date()}</div>
-        {count > 0 && <div className={styles.postCount}>{count}</div>}
+      <div className={classNames.join(' ')} aria-label={`日期 ${dateStr}，文章数 ${count}`}>
+        <span className={styles.dateNumber}>{date.date()}</span>
+        {count > 0 && <span className={styles.postCount}>{count}</span>}
       </div>
     );
   };
@@ -131,7 +137,14 @@ const Sidebar = () => {
             </Button>
           )}
         </div>
-        <Calendar panelTodayBtn panel style={{ width: '100%' }} onChange={handleDateSelect} dateRender={dateRender} />
+        <Calendar
+          panelTodayBtn
+          panel
+          style={{ width: '100%' }}
+          onChange={handleDateSelect}
+          onPanelChange={handlePanelChange}
+          dateRender={dateRender}
+        />
       </div>
       <TagCloud />
     </div>
