@@ -35,7 +35,7 @@ node scripts/append-changelog.js
 
 # 若 CHANGELOG 在暂存区，则将其纳入当前提交（避免延后一提交才生效）
 if git diff --name-only --cached | grep -q '^CHANGELOG.md$'; then
-  git commit --amend --no-edit
+  git commit --amend --no-edit --no-verify
 fi
 
 # 发布逻辑：仅当声明了 release 标记时才执行
