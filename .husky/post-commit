@@ -1,0 +1,53 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# 若是发布提交（standard-version 生成的 chore(release)），直接跳过，防止重复执行
+last_msg=$(git log -1 --pretty=%s)
+case "$last_msg" in
+  "chore(release):"*)
+    exit 0
+    ;;
+  chore\(release\):*)
+    exit 0
+    ;;
+esac
+
+# 读取完整提交信息，用于决定是否进行版本更新与指定版本级别
+full_msg=$(git log -1 --pretty=%B)
+
+# 提取 bump 级别，支持：
+# 1) commit body/subject 中包含 `release-as: patch|minor|major`
+# 2) subject 末尾包含 `[release:patch|minor|major]`
+# 3) 使用 `feat!` 或在 body 写 `BREAKING CHANGE:` 视为 major
+bump=""
+if echo "$full_msg" | grep -qiE 'release-as:[[:space:]]*(major|minor|patch)'; then
+  bump=$(echo "$full_msg" | grep -oiE 'release-as:[[:space:]]*(major|minor|patch)' | sed -E 's/release-as:[[:space:]]*//i')
+elif echo "$full_msg" | grep -qiE '\[release:(major|minor|patch)\]'; then
+  bump=$(echo "$full_msg" | grep -oiE '\[release:(major|minor|patch)\]' | sed -E 's/\[release:(major|minor|patch)\]/\1/i')
+elif echo "$last_msg" | grep -q '!'; then
+  bump="major"
+elif echo "$full_msg" | grep -qi 'BREAKING CHANGE'; then
+  bump="major"
+fi
+
+# 先尝试将本次提交消息追加到 CHANGELOG 并加入暂存
+node scripts/append-changelog.js
+
+# 若 CHANGELOG 在暂存区，则将其纳入当前提交（避免延后一提交才生效）
+if git diff --name-only --cached | grep -q '^CHANGELOG.md$'; then
+  git commit --amend --no-edit
+fi
+
+# 发布逻辑：仅当声明了 release 标记时才执行
+if [ -z "$bump" ]; then
+  echo "跳过版本更新：未声明 release 标记（示例：'release-as: minor' 或 '[release:patch]')"
+else
+  pnpm run release -- --release-as "$bump"
+  # 仅在发布时推送分支与标签
+  if git remote get-url origin >/dev/null 2>&1; then
+    BRANCH=$(git rev-parse --abbrev-ref HEAD)
+    git push --follow-tags origin "$BRANCH"
+  else
+    echo "跳过推送：未配置 origin 远端"
+  fi
+fi
