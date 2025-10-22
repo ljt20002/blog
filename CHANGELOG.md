@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/ljt20002/blog/compare/v1.4.4...v1.5.0) (2025-10-22)
+
+
+### 🐛 Bug 修复
+
+* 修改打包配置 ([2eee103](https://github.com/ljt20002/blog/commit/2eee1035d3886a4a38ca5cb73955a06ba99ddb38))
+
+
+### ✨ 新功能
+
+* 添加错误处理组件和测试页面 ([83238f8](https://github.com/ljt20002/blog/commit/83238f8c09cd975a7f48e87f7dd93beb2eb476a7))
+* feat: 实现博客文章构建与校验系统 ([6f30500](https://github.com/ljt20002/blog/commit/6f30500fbbb05f4256ec85220e16e611d39c86d3))
+
 ### [1.4.4](https://github.com/ljt20002/blog/compare/v1.4.3...v1.4.4) (2025-03-04)
 
 
