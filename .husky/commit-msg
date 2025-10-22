@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# 使用 commitlint 校验提交信息（Conventional Commits）
+pnpm exec commitlint --edit "$1"

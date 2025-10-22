@@ -26,9 +26,6 @@ importers:
       react-router-dom:
         specifier: ^7.1.3
         version: 7.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      standard-version:
-        specifier: ^9.5.0
-        version: 9.5.0
     devDependencies:
       '@arco-plugins/unplugin-react':
         specifier: ^1.0.2
@@ -84,6 +81,9 @@ importers:
       prettier:
         specifier: ^3.3.3
         version: 3.4.2
+      standard-version:
+        specifier: ^9.5.0
+        version: 9.5.0
       typescript:
         specifier: 5.7.3
         version: 5.7.3

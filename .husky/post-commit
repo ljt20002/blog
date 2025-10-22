@@ -1,0 +1,45 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# 若是发布提交（standard-version 生成的 chore(release)），直接跳过，防止重复执行
+last_msg=$(git log -1 --pretty=%s)
+case "$last_msg" in
+  "chore(release):"*)
+    exit 0
+    ;;
+  chore\(release\):*)
+    exit 0
+    ;;
+esac
+
+# 读取完整提交信息，用于决定是否进行版本更新与指定版本级别
+full_msg=$(git log -1 --pretty=%B)
+
+# 提取 bump 级别，支持：
+# 1) commit body/subject 中包含 `release-as: patch|minor|major`
+# 2) subject 末尾包含 `[release:patch|minor|major]`
+# 3) 使用 `feat!` 或在 body 写 `BREAKING CHANGE:` 视为 major
+bump=""
+if echo "$full_msg" | grep -qiE 'release-as:[[:space:]]*(major|minor|patch)'; then
+  bump=$(echo "$full_msg" | grep -oiE 'release-as:[[:space:]]*(major|minor|patch)' | sed -E 's/release-as:[[:space:]]*//i')
+elif echo "$full_msg" | grep -qiE '\[release:(major|minor|patch)\]'; then
+  bump=$(echo "$full_msg" | grep -oiE '\[release:(major|minor|patch)\]' | sed -E 's/\[release:(major|minor|patch)\]/\1/i')
+elif echo "$last_msg" | grep -q '!'; then
+  bump="major"
+elif echo "$full_msg" | grep -qi 'BREAKING CHANGE'; then
+  bump="major"
+fi
+
+if [ -z "$bump" ]; then
+  echo "跳过版本更新：未声明 release 标记（示例：'release-as: minor' 或 '[release:patch]')"
+else
+  pnpm run release -- --release-as "$bump"
+fi
+
+# 自动推送 tag 与当前分支（若配置了 origin 远端）
+if git remote get-url origin >/dev/null 2>&1; then
+  BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  git push --follow-tags origin "$BRANCH"
+else
+  echo "跳过推送：未配置 origin 远端"
+fi
