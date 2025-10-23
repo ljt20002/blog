@@ -8,7 +8,8 @@
     "posts:build": "node ./scripts/build-posts.js",
     "build": "npm run posts:build && rsbuild build",
     "preview": "rsbuild preview",
-    "release": "standard-version"
+    "release": "standard-version",
+    "i18n:check": "node ./scripts/i18n-check.js"
   },
   "dependencies": {
     "@arco-design/web-react": "^2.65.0",

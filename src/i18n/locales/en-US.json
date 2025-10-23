@@ -63,5 +63,6 @@
   "about.otherSkillsList": "Git, Docker, CI/CD, Performance, Responsive Design",
   "about.contactTitle": "Contact",
   "about.emailLabel": "Email: ",
-  "about.wechatLabel": "WeChat Official: Jiatu Tech Share"
+  "about.wechatLabel": "WeChat Official: Jiatu Tech Share",
+  "about.avatarAlt": "Avatar"
 }

@@ -4,5 +4,8 @@
 # 强制提交前校验文章规范（日期/标签/摘要）
 node scripts/build-posts.js --validate-only || exit 1
 
+# i18n 卡点：禁止硬编码文案，词典需双语对齐
+node scripts/i18n-check.js || exit 1
+
 # 如需启用代码质量检查，取消下行注释（需存在 .eslintrc.js）
 # pnpm lint-staged

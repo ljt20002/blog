@@ -9,7 +9,7 @@ const Header = () => {
       <Row className={styles.AvatarBox}>
         <Avatar size={90}>
           <img
-            alt="avatar"
+            alt={t('about.avatarAlt')}
             src="//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp"
           />
         </Avatar>
