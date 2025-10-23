@@ -17,9 +17,11 @@ const applyTheme = (mode: ThemeMode) => {
 };
 
 import { getTheme, setTheme as setGlobalTheme, onThemeChange } from '@/utils/theme';
+import { useI18n } from '@/i18n';
 
 const ThemeToggleInline = () => {
   const [theme, setThemeState] = useState<ThemeMode>('light');
+  const { t } = useI18n();
 
   useEffect(() => {
     const saved = getTheme();
@@ -37,7 +39,7 @@ const ThemeToggleInline = () => {
   return (
     <div className={styles.inlineToggle}>
       <Switch checked={theme === 'dark'} onChange={onChange} />
-      <span>{theme === 'dark' ? '夜间模式' : '日间模式'}</span>
+      <span>{theme === 'dark' ? t('theme.dark') : t('theme.light')}</span>
     </div>
   );
 };

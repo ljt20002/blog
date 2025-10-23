@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { Button } from '@arco-design/web-react';
 import { IconUp } from '@arco-design/web-react/icon';
 import styles from './index.module.less';
+import { useI18n } from '@/i18n';
 
 const BackTop = () => {
   const [visible, setVisible] = useState(false);
+  const { t } = useI18n();
 
   useEffect(() => {
     let ticking = false;
@@ -39,7 +41,7 @@ const BackTop = () => {
 
   return (
     <div className={styles.backTop}>
-      <Button shape="circle" type="primary" aria-label="返回顶部" onClick={scrollToTop}>
+      <Button shape="circle" type="primary" aria-label={t('backtop.aria')} onClick={scrollToTop}>
         <IconUp />
       </Button>
     </div>

@@ -2,9 +2,11 @@ import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { blogMetadata } from '../../mdFiles';
 import styles from './index.module.less';
+import { useI18n } from '@/i18n';
 
 const TagCloud: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useI18n();
 
   // 统计所有标签及其出现次数
   const tags = useMemo(() => {
@@ -43,7 +45,7 @@ const TagCloud: React.FC = () => {
 
   return (
     <div className={styles.tagCloud}>
-      <div className={styles.tagTitle}>标签</div>
+      <div className={styles.tagTitle}>{t('tag.title')}</div>
       <div className={styles.tags}>
         {tags.map((tag) => (
           <span
@@ -55,7 +57,7 @@ const TagCloud: React.FC = () => {
             {tag.name} ({tag.count})
           </span>
         ))}
-        {tags.length === 0 && <span>暂无标签</span>}
+        {tags.length === 0 && <span>{t('tag.empty')}</span>}
       </div>
     </div>
   );

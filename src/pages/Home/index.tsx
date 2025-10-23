@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './index.module.less';
 import { BlogPost } from '../../utils/blogUtils';
 import { blogMetadata } from '../../mdFiles';
+import { useI18n } from '@/i18n';
 
 const { Title, Paragraph } = Typography;
 
@@ -11,6 +12,7 @@ const Home = () => {
   const [featuredPosts, setFeaturedPosts] = useState<BlogPost[]>([]);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { t } = useI18n();
 
   useEffect(() => {
     try {
@@ -41,33 +43,32 @@ const Home = () => {
 
       setFeaturedPosts(sortedPosts);
     } catch (error) {
-      console.error('获取博客文章失败:', error);
+      console.error(t('blog.fetchPostsError'), error);
     }
-  }, [searchParams]); // 依赖于 searchParams
+  }, [searchParams]);
 
   const handlePostClick = (postId: string) => {
     navigate(`/detail?id=${postId}`);
   };
 
-  // 渲染搜索结果标题
   const renderResultTitle = () => {
     const searchQuery = searchParams.get('search');
     const selectedDate = searchParams.get('date');
 
     if (searchQuery) {
-      return `搜索结果: "${searchQuery}"`;
+      return t('home.result.search', { query: searchQuery });
     } else if (selectedDate) {
-      return `${selectedDate} 的文章`;
+      return t('home.result.date', { date: selectedDate });
     } else {
-      return '精选文章';
+      return t('home.result.featured');
     }
   };
 
   return (
     <div className={styles.homeContainer}>
       <Card className={styles.welcomeCard}>
-        <Title heading={2}>嘉图的网络日志</Title>
-        <Paragraph>欢迎来到我的博客！这里记录了我对技术、生活和各种有趣话题的思考。</Paragraph>
+        <Title heading={2}>{t('home.hero.title')}</Title>
+        <Paragraph>{t('home.hero.desc')}</Paragraph>
       </Card>
 
       <Divider />
@@ -85,12 +86,8 @@ const Home = () => {
             ))
           ) : (
             <Card className={styles.postCard}>
-              <Paragraph
-                style={{
-                  marginBottom: 0,
-                }}
-              >
-                没有找到相关文章
+              <Paragraph style={{ marginBottom: 0 }}>
+                {t('home.empty')}
               </Paragraph>
             </Card>
           )}

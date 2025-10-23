@@ -6,11 +6,13 @@ import { blogMetadata } from '../../mdFiles';
 import { useEffect, useMemo, useState } from 'react';
 import { IconClose } from '@arco-design/web-react/icon';
 import TagCloud from '@/components/TagCloud';
+import { useI18n } from '@/i18n';
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchValue, setSearchValue] = useState('');
+  const { t } = useI18n();
   // 追踪当前面板月份用于判定“非本月日期”
   const [panelMonth, setPanelMonth] = useState<string>(() => {
     const d = new Date();
@@ -69,7 +71,7 @@ const Sidebar = () => {
     if (!isInCurrentMonth) classNames.push(styles.notInMonth);
 
     return (
-      <div className={classNames.join(' ')} aria-label={`日期 ${dateStr}，文章数 ${count}`}>
+      <div className={classNames.join(' ')} aria-label={t('sidebar.dateAria', { date: dateStr, count })}>
         <span className={styles.dateNumber}>{date.date()}</span>
         {count > 0 && <span className={styles.postCount}>{count}</span>}
       </div>
@@ -109,7 +111,7 @@ const Sidebar = () => {
     <div className={styles.sidebar}>
       <div className={styles.searchBox}>
         <Input.Search
-          placeholder="搜索文章"
+          placeholder={t('sidebar.search.placeholder')}
           value={searchValue}
           onChange={setSearchValue}
           onSearch={handleSearch}
@@ -124,7 +126,7 @@ const Sidebar = () => {
       </div>
       <div className={styles.calendarBox}>
         <div className={styles.calendarHeader}>
-          <span>日期筛选</span>
+          <span>{t('sidebar.dateFilter')}</span>
           {currentSelectedDate && (
             <Button
               type="text"
@@ -133,7 +135,7 @@ const Sidebar = () => {
               onClick={clearDateFilter}
               className={styles.clearDateBtn}
             >
-              清除
+              {t('sidebar.clear')}
             </Button>
           )}
         </div>

@@ -1,5 +1,6 @@
 import mdFiles from '../mdFiles';
 import { Message } from '@arco-design/web-react';
+import { tRaw } from '@/i18n';
 
 export interface BlogPost {
   id: string;
@@ -19,7 +20,7 @@ export const parseFrontMatter = (content: string) => {
     // 检测是否为HTML内容
     if (content.trim().startsWith('<') && content.includes('</')) {
       // 如果是HTML内容，提取纯文本或使用占位符
-      return { data: {}, content: '这是一篇HTML格式的文章' };
+      return { data: {}, content: tRaw('blog.html.placeholder') };
     }
     return { data: {}, content };
   }
@@ -59,7 +60,7 @@ export const fetchBlogPosts = async (limit?: number) => {
     );
 
     if (fileNames.length === 0) {
-      console.error('没有找到Markdown文件');
+      console.error(tRaw('blog.noMarkdown'));
       return [];
     }
 
@@ -69,7 +70,7 @@ export const fetchBlogPosts = async (limit?: number) => {
           // 修改路径，确保能正确获取文件
           const fileResponse = await fetch(`${window.location.origin}/posts/${fileName}`);
           if (!fileResponse.ok) {
-            throw new Error(`无法获取文件: ${fileName}`);
+            throw new Error(`Failed to fetch: ${fileName}`);
           }
 
           const content = await fileResponse.text();
@@ -79,19 +80,19 @@ export const fetchBlogPosts = async (limit?: number) => {
 
           // 如果摘要看起来像HTML代码，则使用替代文本
           if (firstParagraph?.trim().startsWith('<') && firstParagraph.includes('</')) {
-            firstParagraph = '这是一篇博客文章，点击查看详情';
+            firstParagraph = tRaw('blog.html.summaryFallback');
           }
 
           return {
             id: fileName.replace(/\.md$/, ''),
-            title: data.title || '无标题',
-            date: data.date ? new Date(data.date).toISOString().split('T')[0] : '未知日期',
-            author: data.author || '匿名',
+            title: data.title || tRaw('blog.titleDefault'),
+            date: data.date ? new Date(data.date).toISOString().split('T')[0] : tRaw('blog.dateUnknown'),
+            author: data.author || tRaw('blog.authorAnonymous'),
             tags: Array.isArray(data.tags) ? data.tags : [],
-            summary: firstParagraph || '无摘要',
+            summary: firstParagraph || tRaw('blog.summaryNone'),
           };
         } catch (err) {
-          console.error(`处理文件 ${fileName} 时出错:`, err);
+          console.error(tRaw('blog.fetchPostsError'), err);
           return null;
         }
       }),
@@ -102,8 +103,8 @@ export const fetchBlogPosts = async (limit?: number) => {
     // 如果指定了限制数量，则返回指定数量的文章
     return limit ? filteredPosts.slice(0, limit) : filteredPosts;
   } catch (error) {
-    console.error('获取博客文章失败:', error);
-    Message.error('获取博客列表失败');
+    console.error(tRaw('blog.fetchPostsError'), error);
+    Message.error(tRaw('blog.listError'));
     return [];
   }
 };

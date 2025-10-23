@@ -18,9 +18,11 @@ const applyTheme = (mode: ThemeMode) => {
 };
 
 import { getTheme, setTheme as setGlobalTheme, onThemeChange } from '@/utils/theme';
+import { useI18n } from '@/i18n';
 
 const ThemeToggle = () => {
   const [theme, setThemeState] = useState<ThemeMode>('light');
+  const { t } = useI18n();
 
   useEffect(() => {
     const saved = getTheme();
@@ -37,8 +39,8 @@ const ThemeToggle = () => {
 
   return (
     <div className={styles.themeToggle}>
-      <Tooltip content={theme === 'light' ? '切换到夜间模式' : '切换到日间模式'} position="left">
-        <Button shape="circle" type="secondary" aria-label="切换主题" onClick={toggle}>
+      <Tooltip content={theme === 'light' ? t('theme.toDark') : t('theme.toLight')} position="left">
+        <Button shape="circle" type="secondary" aria-label={t('theme.toggleAria')} onClick={toggle}>
           {theme === 'light' ? <IconMoon /> : <IconSun />}
         </Button>
       </Tooltip>

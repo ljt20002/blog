@@ -1,15 +1,16 @@
 import styles from './index.module.less';
 import { useEffect, useRef } from 'react';
+import { useI18n } from '@/i18n';
 
 const Detail = () => {
   const id = new URLSearchParams(window.location.search).get('id');
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const detailRef = useRef<HTMLDivElement>(null);
+  const { t } = useI18n();
 
   useEffect(() => {
     const handleIframeLoad = () => {
       if (iframeRef.current && detailRef.current) {
-        // 设置 iframe 的高度为其内容的高度
         const height = iframeRef.current.contentWindow?.document.documentElement.scrollHeight;
         if (height) {
           iframeRef.current.style.height = `${height + 50}px`;
@@ -34,7 +35,7 @@ const Detail = () => {
       <iframe
         ref={iframeRef}
         src={`/md/${id}.html`}
-        title="文章详情"
+        title={t('detail.title')}
         loading="lazy"
         sandbox="allow-same-origin allow-scripts"
         referrerPolicy="no-referrer"

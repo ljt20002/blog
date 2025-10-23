@@ -27,12 +27,12 @@ export const contentRoutes: AppRouteObject[] = [
   {
     path: '/home',
     element: <Home />,
-    title: '首页',
+    title: 'nav.home',
   },
   {
     path: '/about-me',
     element: <AboutMe />,
-    title: '关于我',
+    title: 'nav.about',
   },
   // 兼容旧路径
   {
@@ -43,7 +43,7 @@ export const contentRoutes: AppRouteObject[] = [
   {
     path: '/detail',
     element: <Detail />,
-    title: 'Detail',
+    title: 'nav.detail',
     hideInMenu: true,
   },
 ];
@@ -58,11 +58,11 @@ const routes: AppRouteObject[] = [
   {
     path: '/test',
     element: <Test />,
-    title: 'Test',
+    title: 'nav.test',
   },
   {
     path: '*',
-    title: '404',
+    title: 'nav.404',
     element: <NotFound />,
     hideInMenu: true,
   },
