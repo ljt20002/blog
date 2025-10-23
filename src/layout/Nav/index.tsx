@@ -1,6 +1,7 @@
 import { contentRoutes } from '@/routes';
 import styles from './index.module.less';
 import { useLocation, useNavigate } from 'react-router-dom';
+import ThemeToggleInline from '@/components/ThemeToggle/Inline';
 const Nav = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -22,6 +23,9 @@ const Nav = () => {
             </li>
           ))}
       </ul>
+      <div className={styles.toggleWrap}>
+        <ThemeToggleInline />
+      </div>
     </div>
   );
 };

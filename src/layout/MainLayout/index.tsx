@@ -5,6 +5,8 @@ import Sidebar from '../Sidebar';
 import styles from './index.module.less';
 import Footer from '../Footer';
 import TextTranslator from '@/components/TextTranslator';
+import BackTop from '@/components/BackTop';
+import ThemeToggle from '@/components/ThemeToggle';
 const MainLayout = () => (
   <div>
     <Header />
@@ -19,6 +21,8 @@ const MainLayout = () => (
     </div>
     <Footer />
     <TextTranslator />
+    <ThemeToggle />
+    <BackTop />
   </div>
 );
 

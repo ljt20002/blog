@@ -1,7 +1,7 @@
 .sidebar {
   width: 300px;
   padding: 20px;
-  background-color: #fff;
+  background-color: var(--bg-content);
 
   @media screen and (max-width: 825px) {
     width: auto;
@@ -10,7 +10,7 @@
 
   .calendarBox {
     margin-bottom: 20px;
-    border: 1px solid #f0f0f0;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     padding: 12px;
 
@@ -51,7 +51,7 @@
   cursor: pointer;
   font-size: 12px;
   line-height: 1;
-  color: #1D2129;
+  color: var(--text-primary);
 }
 
 .selectedDate .dateNumber {
@@ -80,10 +80,10 @@
 // 在当前文件末尾新增“非本月日期”提示样式
 .notInMonth {
   .dateNumber {
-    color: #c0c4cc;
+
   }
   .postCount {
-    background: #f5f5f5;
-    color: #a0a0a0;
+    background: var(--muted-bg);
+    color: var(--muted-text);
   }
 }

@@ -1,24 +1,24 @@
 .tagCloud {
   padding: 10px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--border-color);
   margin-top: 20px;
 
   .tagTitle {
     font-size: 16px; // 减小标题字体大小
     font-weight: 600;
     margin-bottom: 12px; // 减小底部间距
-    color: #1d2129;
+    color: var(--text-primary);
     padding-bottom: 8px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--border-color);
   }
 
   .tag {
     cursor: pointer;
-    color: #333;
+    color: var(--text-primary);
     transition: all 0.2s;
     padding: 3px 6px; // 减小内边距
     border-radius: 4px;
-    background-color: #f5f7fa;
+    background-color: var(--tag-bg);
     display: inline-block;
     margin-left: 5px;
     margin-bottom: 6px; // 减小底部间距
@@ -26,7 +26,7 @@
 
     &:hover {
       color: #fff;
-      background-color: #1890ff;
+      background-color: var(--brand);
     }
   }
 }

@@ -1,0 +1,20 @@
+.themeToggle {
+  position: fixed;
+  right: 24px;
+  bottom: 72px; /* 放在返回顶部按钮上方，避免遮挡 */
+  z-index: 1000;
+}
+
+@media screen and (max-width: 825px) {
+  .themeToggle {
+    right: 16px;
+    bottom: 64px;
+  }
+}
+
+.inlineToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
